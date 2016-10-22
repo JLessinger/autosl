@@ -24,9 +24,6 @@ class SLEventHandler(LoggingEventHandler):
                 return
 
 def watch():
-    logging.basicConfig(level=logging.INFO,
-                        format='%(asctime)s - %(message)s',
-                        datefmt='%Y-%m-%d %H:%M:%S')
     path = sys.argv[1] if len(sys.argv) > 1 else '.'
     sl_handler = SLEventHandler()
     observer = Observer()
