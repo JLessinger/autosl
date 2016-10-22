@@ -9,14 +9,13 @@ from watchdog.events import LoggingEventHandler
 import subprocess as sp
 
 def sl():
-    sp.Popen(['clear'])
+    sp.Popen(['clear']).wait()
     child = sp.Popen(['git', 'sl'], stdout=sys.stdout)
     child.wait()
     return child.returncode
 
 class SLEventHandler(LoggingEventHandler):
     def dispatch(self, event):
-        print 'go'
         while True:
             rc = sl()
             if rc == 0:
@@ -34,7 +33,6 @@ def watch():
     except KeyboardInterrupt:
         observer.stop()
     observer.join()
-    
 
 if __name__ == "__main__":
     watch()
