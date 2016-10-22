@@ -1,5 +1,7 @@
 automatically run smart log on any file change
 
+**** tested on macOS Sierra with Python 2.7.12 in iTerm 3.0.10
+
 run ./autosl in its own terminal in your repo, and it will automatically run sl
 
 HOW TO USE:
