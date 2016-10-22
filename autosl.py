@@ -10,17 +10,16 @@ import subprocess as sp
 
 def sl():
     sp.Popen(['clear'])
-    child = sp.Popen(['git', 'sl'], stdout=sp.PIPE)
-    streamdata = child.communicate()[0]
-    return streamdata, child.returncode
+    child = sp.Popen(['git', 'sl'], stdout=sys.stdout)
+    child.wait()
+    return child.returncode
 
 class SLEventHandler(LoggingEventHandler):
     def dispatch(self, event):
         print 'go'
         while True:
-            out, rc = sl()
+            rc = sl()
             if rc == 0:
-                print out
                 return
 
 def watch():
