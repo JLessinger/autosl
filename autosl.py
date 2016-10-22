@@ -2,6 +2,7 @@
 
 import sys
 import time
+from datetime import datetime
 import logging
 from watchdog.observers import Observer
 from watchdog.events import LoggingEventHandler
@@ -15,10 +16,17 @@ def sl():
     return child.returncode
 
 class SLEventHandler(LoggingEventHandler):
+    def __init__(self):
+        super(SLEventHandler, self).__init__()
+        self.last_sec = None
     def dispatch(self, event):
         while True:
+            sec = datetime.now().second
+            if sec == self.last_sec:
+                return
             rc = sl()
             if rc == 0:
+                self.last_sec = sec
                 return
 
 def watch():
